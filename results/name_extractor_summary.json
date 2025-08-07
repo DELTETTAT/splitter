@@ -1,0 +1,821 @@
+{
+    "Consolidated Names": {
+        "Altash Ahmad": [
+            "Altash",
+            "Ahmad"
+        ],
+        "Ahmad Altash Patient Id": [
+            "Ahmad",
+            "Altash",
+            "Patient",
+            "Id"
+        ],
+        "Wright": [
+            "Wright"
+        ],
+        "Macica": [
+            "Macica"
+        ],
+        "Rachel Wright": [
+            "Rachel",
+            "Wright"
+        ],
+        "Greg": [
+            "Greg"
+        ],
+        "Nomura": [
+            "Nomura"
+        ],
+        "Curtis": [
+            "Curtis"
+        ],
+        "Sue Cross": [
+            "Sue",
+            "Cross"
+        ],
+        "Stephanie Stevens": [
+            "Stephanie",
+            "Stevens"
+        ],
+        "Peish": [
+            "Peish"
+        ],
+        "Odil Vazirov": [
+            "Odil",
+            "Vazirov"
+        ],
+        "Stacy Barron": [
+            "Stacy",
+            "Barron"
+        ],
+        "Barron": [
+            "Barron"
+        ],
+        "You": [
+            "You"
+        ],
+        "Jackson": [
+            "Jackson"
+        ],
+        "Stacy J Barron": [
+            "Stacy",
+            "J",
+            "Barron"
+        ],
+        "Susan M Somerset": [
+            "Susan",
+            "M",
+            "Somerset"
+        ],
+        "Anderson": [
+            "Anderson"
+        ],
+        "Jolene Anderson": [
+            "Jolene",
+            "Anderson"
+        ],
+        "Stephanie": [
+            "Stephanie"
+        ],
+        "Teresa": [
+            "Teresa"
+        ],
+        "Newel Bann": [
+            "Newel",
+            "Bann"
+        ],
+        "Lennon": [
+            "Lennon"
+        ],
+        "Nehemiah Yared": [
+            "Nehemiah",
+            "Yared"
+        ],
+        "Reynolds": [
+            "Reynolds"
+        ],
+        "Janice Trinh": [
+            "Janice",
+            "Trinh"
+        ],
+        "Denis": [
+            "Denis"
+        ],
+        "Dinitriy Barshay": [
+            "Dinitriy",
+            "Barshay"
+        ],
+        "Cristiano Fierro Lab": [
+            "Cristiano",
+            "Fierro",
+            "Lab"
+        ],
+        "Halle": [
+            "Halle"
+        ],
+        "Keller": [
+            "Keller"
+        ],
+        "James A Feinstein": [
+            "James",
+            "A",
+            "Feinstein"
+        ],
+        "Liudmyla Slongovska": [
+            "Liudmyla",
+            "Slongovska"
+        ],
+        "Mark Baravik": [
+            "Mark",
+            "Baravik"
+        ],
+        "Katherine R Ajose": [
+            "Katherine",
+            "R",
+            "Ajose"
+        ],
+        "Isaac Azeze": [
+            "Isaac",
+            "Azeze"
+        ],
+        "Ibrahim": [
+            "Ibrahim"
+        ],
+        "F": [
+            "F"
+        ],
+        "Emmanuel": [
+            "Emmanuel"
+        ],
+        "Olga": [
+            "Olga"
+        ],
+        "Ahmed Nader": [
+            "Ahmed",
+            "Nader"
+        ],
+        "Do G": [
+            "Do",
+            "G"
+        ],
+        "Amos Su": [
+            "Amos",
+            "Su"
+        ],
+        "Mostafa Alazhari": [
+            "Mostafa",
+            "Alazhari"
+        ],
+        "Isabella Shanker": [
+            "Isabella",
+            "Shanker"
+        ],
+        "Aron Tesfalem": [
+            "Aron",
+            "Tesfalem"
+        ],
+        "Tor To": [
+            "Tor",
+            "To"
+        ],
+        "Alnaiame Mostafa": [
+            "Alnaiame",
+            "Mostafa"
+        ],
+        "Saad Eljahmi": [
+            "Saad",
+            "Eljahmi"
+        ],
+        "Ibrahim Asmaa A": [
+            "Ibrahim",
+            "Asmaa",
+            "A"
+        ],
+        "Ibrahim Asmaa A Os": [
+            "Ibrahim",
+            "Asmaa",
+            "A",
+            "Os"
+        ],
+        "Christine Jackson": [
+            "Christine",
+            "Jackson"
+        ],
+        "Fatima Haidarah Patient Id": [
+            "Fatima",
+            "Haidarah",
+            "Patient",
+            "Id"
+        ],
+        "Christine Jackson Patient Id": [
+            "Christine",
+            "Jackson",
+            "Patient",
+            "Id"
+        ]
+    },
+    "Total Unique Names": 55,
+    "Full Name Registry": {
+        "AA": "Altash Ahmad",
+        "AAPI": "Ahmad Altash Patient Id",
+        "W": "Wright",
+        "M": "Macica",
+        "RW": "Rachel Wright",
+        "G": "Greg",
+        "N": "Nomura",
+        "C": "Curtis",
+        "SC": "Sue Cross",
+        "SS": "Stephanie Stevens",
+        "P": "Peish",
+        "OV": "Odil Vazirov",
+        "SB": "Stacy Barron",
+        "B": "Barron",
+        "Y": "You",
+        "J": "Jackson",
+        "SJB": "Stacy J Barron",
+        "SMS": "Susan M Somerset",
+        "A": "Anderson",
+        "JA": "Jolene Anderson",
+        "S": "Stephanie",
+        "T": "Teresa",
+        "NB": "Newel Bann",
+        "L": "Lennon",
+        "NY": "Nehemiah Yared",
+        "R": "Reynolds",
+        "JT": "Janice Trinh",
+        "D": "Denis",
+        "DB": "Dinitriy Barshay",
+        "CFL": "Cristiano Fierro Lab",
+        "H": "Halle",
+        "K": "Keller",
+        "JAF": "James A Feinstein",
+        "LS": "Liudmyla Slongovska",
+        "MB": "Mark Baravik",
+        "KRA": "Katherine R Ajose",
+        "IA": "Isaac Azeze",
+        "I": "Ibrahim",
+        "F": "F",
+        "E": "Emmanuel",
+        "O": "Olga",
+        "AN": "Ahmed Nader",
+        "DG": "Do G",
+        "AS": "Amos Su",
+        "MA": "Mostafa Alazhari",
+        "IS": "Isabella Shanker",
+        "AT": "Aron Tesfalem",
+        "TT": "Tor To",
+        "AM": "Alnaiame Mostafa",
+        "SE": "Saad Eljahmi",
+        "IAA": "Ibrahim Asmaa A",
+        "IAAO": "Ibrahim Asmaa A Os",
+        "CJ": "Christine Jackson",
+        "FHPI": "Fatima Haidarah Patient Id",
+        "CJPI": "Christine Jackson Patient Id"
+    },
+    "Name Counter": [
+        [
+            "Christine Jackson",
+            27
+        ],
+        [
+            "Chris",
+            16
+        ],
+        [
+            "H",
+            13
+        ],
+        [
+            "Ibrahim",
+            11
+        ],
+        [
+            "Dmitriy Barshay",
+            9
+        ],
+        [
+            "Mo",
+            8
+        ],
+        [
+            "P",
+            7
+        ],
+        [
+            "Bryan",
+            6
+        ],
+        [
+            "And",
+            5
+        ],
+        [
+            "Jackson",
+            5
+        ],
+        [
+            "Na",
+            4
+        ],
+        [
+            "J",
+            4
+        ],
+        [
+            "D",
+            4
+        ],
+        [
+            "Anderson",
+            4
+        ],
+        [
+            "A",
+            4
+        ],
+        [
+            "Olga",
+            4
+        ],
+        [
+            "Poll",
+            3
+        ],
+        [
+            "Ya",
+            3
+        ],
+        [
+            "Rachel",
+            3
+        ],
+        [
+            "Me",
+            3
+        ],
+        [
+            "Janice Trinh",
+            3
+        ],
+        [
+            "Wei",
+            3
+        ],
+        [
+            "Altash Ahmad",
+            2
+        ],
+        [
+            "Wright",
+            2
+        ],
+        [
+            "Cass",
+            2
+        ],
+        [
+            "Stacy J Barron",
+            2
+        ],
+        [
+            "Teresa",
+            2
+        ],
+        [
+            "St",
+            2
+        ],
+        [
+            "Dmitrly Barshay",
+            2
+        ],
+        [
+            "Yo",
+            2
+        ],
+        [
+            "Mark Baravik",
+            2
+        ],
+        [
+            "C",
+            2
+        ],
+        [
+            "E",
+            2
+        ],
+        [
+            "Reynolds",
+            2
+        ],
+        [
+            "Chi",
+            2
+        ],
+        [
+            "B",
+            2
+        ],
+        [
+            "At",
+            2
+        ],
+        [
+            "Ch",
+            2
+        ],
+        [
+            "Ahmad Altash Patient Id",
+            1
+        ],
+        [
+            "Mel",
+            1
+        ],
+        [
+            "Rachel Wright",
+            1
+        ],
+        [
+            "G",
+            1
+        ],
+        [
+            "Sue Cross",
+            1
+        ],
+        [
+            "Stephanie Stevens",
+            1
+        ],
+        [
+            "Odil Vazirov",
+            1
+        ],
+        [
+            "Stacy Barron",
+            1
+        ],
+        [
+            "Barron",
+            1
+        ],
+        [
+            "Ye",
+            1
+        ],
+        [
+            "Jo",
+            1
+        ],
+        [
+            "Susan M Somerset",
+            1
+        ],
+        [
+            "Jolene Anderson",
+            1
+        ],
+        [
+            "Stephanie",
+            1
+        ],
+        [
+            "Tor",
+            1
+        ],
+        [
+            "Newel Bann",
+            1
+        ],
+        [
+            "Le",
+            1
+        ],
+        [
+            "Nehemiah Yared",
+            1
+        ],
+        [
+            "Wes",
+            1
+        ],
+        [
+            "Pa",
+            1
+        ],
+        [
+            "Curtis",
+            1
+        ],
+        [
+            "Ba",
+            1
+        ],
+        [
+            "Janice Tinh",
+            1
+        ],
+        [
+            "Peish",
+            1
+        ],
+        [
+            "Moe",
+            1
+        ],
+        [
+            "Nomura",
+            1
+        ],
+        [
+            "Cristiano Fierro Lab",
+            1
+        ],
+        [
+            "Macica",
+            1
+        ],
+        [
+            "Do",
+            1
+        ],
+        [
+            "Stacy Baron",
+            1
+        ],
+        [
+            "Halle",
+            1
+        ],
+        [
+            "Hale",
+            1
+        ],
+        [
+            "Aaron",
+            1
+        ],
+        [
+            "Kid",
+            1
+        ],
+        [
+            "James A Feinstein",
+            1
+        ],
+        [
+            "Liudmyla Slongovska",
+            1
+        ],
+        [
+            "Li",
+            1
+        ],
+        [
+            "Katherine R Ajose",
+            1
+        ],
+        [
+            "W",
+            1
+        ],
+        [
+            "Je",
+            1
+        ],
+        [
+            "Nam",
+            1
+        ],
+        [
+            "Madara",
+            1
+        ],
+        [
+            "Dave",
+            1
+        ],
+        [
+            "Isaac Azeze",
+            1
+        ],
+        [
+            "Isaac",
+            1
+        ],
+        [
+            "F",
+            1
+        ],
+        [
+            "Greg",
+            1
+        ],
+        [
+            "Dmitry Barshay",
+            1
+        ],
+        [
+            "Dinitriy Barshay",
+            1
+        ],
+        [
+            "Smee",
+            1
+        ],
+        [
+            "Emmanuel",
+            1
+        ],
+        [
+            "Keller",
+            1
+        ],
+        [
+            "Emanuel",
+            1
+        ],
+        [
+            "Manny",
+            1
+        ],
+        [
+            "Da",
+            1
+        ],
+        [
+            "Efava",
+            1
+        ],
+        [
+            "Eli",
+            1
+        ],
+        [
+            "Dani",
+            1
+        ],
+        [
+            "Ahmed Nader",
+            1
+        ],
+        [
+            "Han",
+            1
+        ],
+        [
+            "Aba",
+            1
+        ],
+        [
+            "Ho",
+            1
+        ],
+        [
+            "Do G",
+            1
+        ],
+        [
+            "Ashe",
+            1
+        ],
+        [
+            "S",
+            1
+        ],
+        [
+            "By",
+            1
+        ],
+        [
+            "Se",
+            1
+        ],
+        [
+            "Lennon",
+            1
+        ],
+        [
+            "Amos Su",
+            1
+        ],
+        [
+            "Mostafa Alnaame",
+            1
+        ],
+        [
+            "Modia",
+            1
+        ],
+        [
+            "Isabella Shanker",
+            1
+        ],
+        [
+            "Aron Tesfalem",
+            1
+        ],
+        [
+            "Si",
+            1
+        ],
+        [
+            "Ra",
+            1
+        ],
+        [
+            "Tor To",
+            1
+        ],
+        [
+            "Ave",
+            1
+        ],
+        [
+            "Re",
+            1
+        ],
+        [
+            "Ren",
+            1
+        ],
+        [
+            "Alnaiame Mostafa",
+            1
+        ],
+        [
+            "Be",
+            1
+        ],
+        [
+            "Sc",
+            1
+        ],
+        [
+            "Altash",
+            1
+        ],
+        [
+            "Porap",
+            1
+        ],
+        [
+            "Al",
+            1
+        ],
+        [
+            "Mostafa Alazhari",
+            1
+        ],
+        [
+            "Saad Eljahmi",
+            1
+        ],
+        [
+            "Co",
+            1
+        ],
+        [
+            "Denis",
+            1
+        ],
+        [
+            "Ibrahim Asmaa A",
+            1
+        ],
+        [
+            "Ibrahim Asmaa A Os",
+            1
+        ],
+        [
+            "Alta",
+            1
+        ],
+        [
+            "Jas",
+            1
+        ],
+        [
+            "Ad",
+            1
+        ],
+        [
+            "You",
+            1
+        ],
+        [
+            "Fatima Haidarah Patient Id",
+            1
+        ],
+        [
+            "Christine Jackson Patient Id",
+            1
+        ],
+        [
+            "La",
+            1
+        ]
+    ]
+}

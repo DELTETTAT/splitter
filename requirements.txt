@@ -1,0 +1,8 @@
+PyMuPDF
+pikepdf
+langchain
+rapidfuzz
+pytesseract
+transformers
+numpy
+opencv-python
