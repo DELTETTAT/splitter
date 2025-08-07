@@ -13,13 +13,31 @@ class PDFSplitter:
             grouped.setdefault(name, []).append(idx)
 
         Path(output_dir).mkdir(parents=True, exist_ok=True)
-        # original PDF path is in metadata if needed
+
+        # Get original PDF path from metadata
+        original_pdf = None
+        for doc in docs:
+            if doc.metadata.get('source_pdf'):
+                original_pdf = doc.metadata['source_pdf']
+                break
+
+        if not original_pdf:
+            raise ValueError("No source PDF path found in document metadata")
+
+        # Split PDFs by patient
         for patient, pages in grouped.items():
-            out_path = Path(output_dir) / f"{patient.replace(' ', '_')}.pdf"
-            with pikepdf.Pdf.new() as pdf_out:
-                # for each page index, import the page
-                original = docs[0].metadata.get('source_pdf')
-                src = pikepdf.Pdf.open(original)
-                for i in sorted(pages):
-                    pdf_out.pages.append(src.pages[i])
-                pdf_out.save(out_path)
+            safe_name = "".join(c for c in patient if c.isalnum() or c in (' ', '-', '_')).rstrip()
+            safe_name = safe_name.replace(' ', '_')
+            out_path = Path(output_dir) / f"{safe_name}.pdf"
+
+            try:
+                with pikepdf.Pdf.new() as pdf_out:
+                    src = pikepdf.Pdf.open(original_pdf)
+                    for i in sorted(pages):
+                        if i < len(src.pages):
+                            pdf_out.pages.append(src.pages[i])
+                    pdf_out.save(out_path)
+                    src.close()
+                print(f"Created: {out_path}")
+            except Exception as e:
+                print(f"Error creating PDF for {patient}: {e}")

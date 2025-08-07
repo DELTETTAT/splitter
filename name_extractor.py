@@ -149,3 +149,107 @@ if __name__ == "__main__":
             "Full Name Registry": name_extractor.full_name_registry,
             "Name Counter": name_extractor.name_counter.most_common()
         }, f, indent=4)
+import re
+import logging
+from collections import defaultdict, Counter
+from typing import Dict, List, Set
+from langchain.schema import Document
+from rapidfuzz import fuzz
+
+logger = logging.getLogger(__name__)
+
+class NameExtractor:
+    def __init__(self):
+        self.name_patterns = [
+            r'\b([A-Z][a-z]+ [A-Z][a-z]+(?:\s+[A-Z][a-z]+)?)\b',  # Title case names
+            r'(?:Patient|Name|DOB|Date of Birth)[\s:]+([A-Z][a-z]+ [A-Z][a-z]+)',
+            r'([A-Z]{2,}(?:\s+[A-Z]{2,})+)',  # All caps names
+        ]
+        self.extracted_names = defaultdict(set)
+        
+    def extract(self, documents: List[Document]):
+        """Extract names from all documents"""
+        self.extracted_names.clear()
+        
+        for doc in documents:
+            page_num = doc.metadata.get('page', 0)
+            text = doc.page_content
+            
+            # Extract potential names using patterns
+            for pattern in self.name_patterns:
+                matches = re.findall(pattern, text, re.IGNORECASE)
+                for match in matches:
+                    cleaned_name = self.clean_name(match)
+                    if self.is_valid_name(cleaned_name):
+                        self.extracted_names[page_num].add(cleaned_name)
+    
+    def clean_name(self, name: str) -> str:
+        """Clean and normalize extracted name"""
+        # Remove extra whitespace and normalize case
+        name = ' '.join(name.split()).title()
+        
+        # Remove common non-name words
+        exclude_words = {'The', 'And', 'Or', 'Of', 'In', 'On', 'At', 'To', 'For'}
+        words = [w for w in name.split() if w not in exclude_words]
+        
+        return ' '.join(words)
+    
+    def is_valid_name(self, name: str) -> bool:
+        """Validate if extracted text is likely a name"""
+        if len(name) < 3 or len(name) > 50:
+            return False
+            
+        # Must have at least 2 parts
+        parts = name.split()
+        if len(parts) < 2:
+            return False
+            
+        # Each part should be reasonable length
+        for part in parts:
+            if len(part) < 2 or len(part) > 20:
+                return False
+                
+        # Should not contain numbers or special characters
+        if re.search(r'[0-9@#$%^&*()_+=\[\]{}|;:,.<>?/~`]', name):
+            return False
+            
+        return True
+    
+    def get_consolidated_name_tokens(self, min_pages: int = 2) -> Dict[str, Set[str]]:
+        """Consolidate similar names across pages"""
+        all_names = set()
+        for page_names in self.extracted_names.values():
+            all_names.update(page_names)
+        
+        # Group similar names
+        name_groups = defaultdict(set)
+        processed = set()
+        
+        for name in all_names:
+            if name in processed:
+                continue
+                
+            # Find similar names
+            similar_names = {name}
+            for other_name in all_names:
+                if other_name != name and other_name not in processed:
+                    similarity = fuzz.ratio(name.lower(), other_name.lower())
+                    if similarity > 85:  # High similarity threshold
+                        similar_names.add(other_name)
+            
+            # Use the most common or longest name as canonical
+            canonical = max(similar_names, key=len)
+            name_groups[canonical] = similar_names
+            processed.update(similar_names)
+        
+        # Filter by minimum page count
+        filtered_groups = {}
+        for canonical, variants in name_groups.items():
+            page_count = sum(
+                1 for page_names in self.extracted_names.values()
+                if any(variant in page_names for variant in variants)
+            )
+            if page_count >= min_pages:
+                filtered_groups[canonical] = variants
+        
+        return filtered_groups

@@ -93,7 +93,7 @@ class PDFExtractor:
             text = page.get_text().strip()
             metadata = {
                 "page": page_index + 1,
-                "source_pdf": path,
+                "source_pdf": str(path), # Ensure path is a string
                 "ocr": False,
                 "header_footer_removed": False
             }
@@ -105,7 +105,7 @@ class PDFExtractor:
             img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
             processed_image = clean_image_for_ocr(img)
             ocr_text = pytesseract.image_to_string(processed_image)
-            metadata.update({"ocr": True})
+            metadata.update({"ocr": True}) # Ensure OCR flag is set
             return Document(page_content=ocr_text, metadata=metadata)
 
         finally:
@@ -113,10 +113,18 @@ class PDFExtractor:
             gc.collect()
 
     def text_extractor(self, path: str):
-        base_doc = fitz.open(path)
-        total_pages = len(base_doc)
-        logger.info(f"Total pages: {total_pages}")
-        base_doc.close()
+        if not os.path.exists(path):
+            logger.error(f"File not found: {path}")
+            return []
+
+        try:
+            base_doc = fitz.open(path)
+            total_pages = len(base_doc)
+            logger.info(f"Total pages: {total_pages}")
+            base_doc.close()
+        except Exception as e:
+            logger.error(f"Error opening PDF {path}: {e}")
+            return []
 
         documents = [None] * total_pages
         start_time = time.time()
@@ -133,13 +141,13 @@ class PDFExtractor:
                     logger.error(f"Timeout on page {page_index + 1}")
                     documents[page_index] = Document(
                         page_content="",
-                        metadata={"page": page_index + 1, "error": "Timeout"}
+                        metadata={"page": page_index + 1, "source_pdf": str(path), "error": "Timeout"}
                     )
                 except Exception as e:
                     logger.error(f"Error on page {page_index + 1}: {e}")
                     documents[page_index] = Document(
                         page_content="",
-                        metadata={"page": page_index + 1, "error": str(e)}
+                        metadata={"page": page_index + 1, "source_pdf": str(path), "error": str(e)}
                     )
 
         elapsed = time.time() - start_time
@@ -147,23 +155,36 @@ class PDFExtractor:
         return documents
 
 if __name__ == "__main__":
-    path = r"C:\Users\pc\Desktop\medrec sample data\PDF sorting.pdf"
-    extractor = PDFExtractor()
-    documents = extractor.text_extractor(path)
-    print(f"Extracted {len(documents)} documents")
-    for i, doc in enumerate(documents[:3]):
-        print(f"\nPage {i + 1} Content: {doc.page_content[:100]}...")
-        print(f"Metadata: {doc.metadata}")
+    # Note: The path below is a placeholder and should be adjusted to a valid PDF file.
+    # Also, ensure that 'opencv-python' is installed: pip install opencv-python pytesseract PyMuPDF langchain Pillow
+    # For pytesseract to work, you might need to install Tesseract OCR engine separately and set its path.
+    # Example: pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    
+    pdf_path = r"C:\Users\pc\Desktop\medrec sample data\PDF sorting.pdf" # Replace with an actual PDF path
+    
+    if not os.path.exists(pdf_path):
+        print(f"Error: The specified PDF file does not exist at '{pdf_path}'")
+    else:
+        extractor = PDFExtractor()
+        documents = extractor.text_extractor(pdf_path)
+        print(f"Extracted {len(documents)} documents")
+        for i, doc in enumerate(documents[:3]):
+            print(f"\nPage {i + 1} Content: {doc.page_content[:100]}...")
+            print(f"Metadata: {doc.metadata}")
 
-    os.makedirs("results", exist_ok=True)
-    with open("results/extractor_summary.json", "w") as f:
-        json.dump({
-            "Extracted Documents": len(documents),
-            "Documents": [
-                {
-                    "Page": i + 1,
-                    "Content": doc.page_content,
-                    "Metadata": doc.metadata
-                } for i, doc in enumerate(documents)
-            ]
-        }, f, indent=4)
+        os.makedirs("results", exist_ok=True)
+        try:
+            with open("results/extractor_summary.json", "w", encoding="utf-8") as f:
+                json.dump({
+                    "Extracted Documents": len(documents),
+                    "Documents": [
+                        {
+                            "Page": i + 1,
+                            "Content": doc.page_content,
+                            "Metadata": doc.metadata
+                        } for i, doc in enumerate(documents)
+                    ]
+                }, f, indent=4)
+            print("Extraction summary saved to results/extractor_summary.json")
+        except Exception as e:
+            print(f"Error saving extraction summary: {e}")

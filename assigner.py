@@ -164,3 +164,85 @@ if __name__ == "__main__":
             "Assignments": assignments,
             "Review": review
         }, f, indent=4)
+import logging
+from typing import Dict, List, Tuple, Set, Any
+from collections import defaultdict
+from langchain.schema import Document
+from rapidfuzz import fuzz
+
+logger = logging.getLogger(__name__)
+
+def assign_pages_to_patients(
+    documents: List[Document], 
+    consolidated_names: Dict[str, Set[str]]
+) -> Tuple[Dict[str, List[int]], List[Tuple[int, List[str], str]]]:
+    """
+    Assign pages to patients based on extracted names
+    
+    Returns:
+        - assignments: Dict mapping patient names to page numbers
+        - review_queue: List of (page_num, candidates, reason) for manual review
+    """
+    assignments = defaultdict(list)
+    review_queue = []
+    
+    for doc in documents:
+        page_num = doc.metadata.get('page', 0)
+        text = doc.page_content.lower()
+        
+        # Find matching patients for this page
+        matches = []
+        for canonical_name, variants in consolidated_names.items():
+            confidence = 0
+            
+            # Check for exact matches
+            for variant in variants:
+                if variant.lower() in text:
+                    confidence = max(confidence, 100)
+                    break
+            
+            # Check for fuzzy matches
+            if confidence < 100:
+                for variant in variants:
+                    # Split into words and check individual matches
+                    variant_words = variant.lower().split()
+                    text_words = text.split()
+                    
+                    word_matches = 0
+                    for v_word in variant_words:
+                        for t_word in text_words:
+                            if fuzz.ratio(v_word, t_word) > 85:
+                                word_matches += 1
+                                break
+                    
+                    if word_matches == len(variant_words):
+                        confidence = max(confidence, 80)
+                    elif word_matches > 0:
+                        confidence = max(confidence, 60)
+            
+            if confidence > 60:
+                matches.append((canonical_name, confidence))
+        
+        # Sort by confidence
+        matches.sort(key=lambda x: x[1], reverse=True)
+        
+        if len(matches) == 0:
+            review_queue.append((page_num, [], "No patient names found"))
+        elif len(matches) == 1:
+            patient_name = matches[0][0]
+            assignments[patient_name].append(page_num)
+        elif matches[0][1] > matches[1][1] + 20:  # Clear winner
+            patient_name = matches[0][0]
+            assignments[patient_name].append(page_num)
+        else:
+            # Ambiguous - needs review
+            candidates = [match[0] for match in matches[:3]]
+            review_queue.append((page_num, candidates, "Multiple candidates with similar confidence"))
+    
+    # Convert defaultdict to regular dict
+    final_assignments = {k: v for k, v in assignments.items()}
+    
+    logger.info(f"Assigned {sum(len(pages) for pages in final_assignments.values())} pages to {len(final_assignments)} patients")
+    logger.info(f"{len(review_queue)} pages need manual review")
+    
+    return final_assignments, review_queue

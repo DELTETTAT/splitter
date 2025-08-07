@@ -6,3 +6,9 @@ pytesseract
 transformers
 numpy
 opencv-python
+langgraph
+langchain-community
+accelerate
+bitsandbytes
+sentencepiece
+protobuf
